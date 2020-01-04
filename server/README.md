@@ -1,2 +1,2 @@
-# crosswords_generator
-WIP: Algorithmic generated crossword project 
+#### crosswords_generator
+ Backend for Algorithmic generated crossword project 
