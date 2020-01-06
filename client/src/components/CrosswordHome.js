@@ -3,11 +3,20 @@ import { connect } from 'react-redux'
 import { updateName } from '../actions'
 import Crossword from './Crossword/Crossword'
 
-const Home = ({ name, onChange }) => <div></div>
+class CrosswordHome extends React.Component {
+
+    render(){
+        return(
+            <div>
+            <Crossword ></Crossword>
+            </div>
+        )
+    }
+}
 
 const mapStateToProps = state => {
 	return {
-		name: state.name,
+		board: state.board.board,
 	}
 }
 
@@ -17,4 +26,4 @@ const mapDispatchToProps = dispatch => ({
 	},
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home)
+export default connect(mapStateToProps, mapDispatchToProps)(CrosswordHome)

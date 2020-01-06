@@ -3,20 +3,24 @@ import { TextField, TableCell } from '@material-ui/core'
 import style from './crosswordgriditem.less'
 
 function CrosswordGridItem(props) {
-    const renderCellContent = (content) => {
-        if (content == "#") {
+    const handleEnterLetter = (event) => {
+        props.enterLetter(event.target.value, props.x, props.y)
+    }
+    const renderCellContent = () => {
+        if (props.letter == "#") {
             return <TableCell className={style.filled} />
         }
-        return (<TableCell className={style.cell}>
-                    <TextField 
-                        InputProps={{
-                            disableUnderline: true,
-                            textAlign: "center",
-                        }}
-                        value={content}/>
-                </TableCell>)
+        if (props.selected) {
+            return <TableCell
+                className={style.selected}
+                onClick={() => props.selectCell(props.x, props.y)}>
+                {props.letter}
+            </TableCell>
+        }
+
+        return (<TableCell className={style.cell} onClick={() => props.selectCell(props.x, props.y)}>{props.letter}</TableCell>)
     }
-    return renderCellContent(props.text)
+    return renderCellContent()
 }
 
 export default CrosswordGridItem
