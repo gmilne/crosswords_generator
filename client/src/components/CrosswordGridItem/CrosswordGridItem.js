@@ -1,26 +1,36 @@
 import React from 'react'
-import { TextField, TableCell } from '@material-ui/core'
+import { Typography } from '@material-ui/core'
 import style from './crosswordgriditem.less'
 
 function CrosswordGridItem(props) {
     const handleEnterLetter = (event) => {
         props.enterLetter(event.target.value, props.x, props.y)
     }
-    const renderCellContent = () => {
-        if (props.letter == "#") {
-            return <TableCell className={style.filled} />
-        }
-        if (props.selected) {
-            return <TableCell
-                className={style.selected}
-                onClick={() => props.selectCell(props.x, props.y)}>
-                {props.letter}
-            </TableCell>
-        }
-
-        return (<TableCell className={style.cell} onClick={() => props.selectCell(props.x, props.y)}>{props.letter}</TableCell>)
+    const handleSelectCell = () => {
+        props.selectCell(props.x, props.y)
     }
-    return renderCellContent()
+
+    const getStyle = () => {
+        if (props.letter === "#") {
+            return style.filled
+        } else if (props.selected.x === props.x && props.selected.y === props.y) {
+            return style.cell_selected
+        } else if ((props.selected.x === props.x && props.axis === 'y') ||  (props.selected.y === props.y && props.axis === 'x') ) {
+            return style.row_highlight
+        }
+        return style.cell
+    }
+
+    const renderCell = () => {
+        return (
+            <div className={getStyle()} onClick={handleSelectCell}>
+                <Typography className={style.letter} variant="h4">
+                    {props.letter}
+                </Typography>
+            </div>)
+    }
+
+    return renderCell()
 }
 
 export default CrosswordGridItem

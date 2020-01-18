@@ -16,7 +16,7 @@ class CrosswordHome extends React.Component {
 
 const mapStateToProps = state => {
 	return {
-		board: state.board.board,
+		
 	}
 }
 
